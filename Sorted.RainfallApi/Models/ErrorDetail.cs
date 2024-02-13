@@ -7,9 +7,15 @@ namespace Sorted.RainfallApi.Models
     /// </summary>
     public class ErrorDetail
     {
+        /// <summary>
+        /// Gets or sets the property name
+        /// </summary>
         [JsonPropertyName("propertyName")]
         public string PropertyName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message
+        /// </summary>
         [JsonPropertyName("message")]
         public string Message { get; set; }
     }

@@ -7,9 +7,15 @@ namespace Sorted.RainfallApi.Models
     /// </summary>
     public class RainfallReading
     {
+        /// <summary>
+        /// Gets or sets the date measured
+        /// </summary>
         [JsonPropertyName("dateMeasured")]
         public string DateMeasured { get; set; }
 
+        /// <summary>
+        /// Gets or sets the amount measured
+        /// </summary>
         [JsonPropertyName("amountMeasured")]
         public decimal AmountMeasured { get; set; }
     }

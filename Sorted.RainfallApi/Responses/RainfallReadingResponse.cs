@@ -8,6 +8,9 @@ namespace Sorted.RainfallApi.Responses
     /// </summary>
     public class RainfallReadingResponse
     {
+        /// <summary>
+        /// Gets or sets the readings
+        /// </summary>
         [JsonPropertyName("readings")]
         public List<RainfallReading> Readings { get; set; }
     }

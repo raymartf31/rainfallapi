@@ -30,9 +30,49 @@ namespace Sorted.RainfallApi.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRainfall(string stationId, int count = 10)
         {
-            List<RainfallReading> readings = await _rainfallService.GetReadings(Convert.ToInt32(stationId), count);
+            List<RainfallReading> readings;
 
-            return Ok(new RainfallReadingResponse{ Readings = readings });
+            try
+            {
+                readings = await _rainfallService.GetReadings(Convert.ToInt32(stationId), count);
+
+                if (!readings.Any())
+                {
+                    return StatusCode(StatusCodes.Status404NotFound,
+                        new ErrorResponse
+                        {
+                            Message = "No readings found for the specified stationId"
+                        });
+                }
+            }
+            catch (FormatException formatEx)
+            {
+                // Log formatEx
+                return StatusCode(StatusCodes.Status400BadRequest,
+                    new ErrorResponse
+                    {
+                        Message = "Invalid request",
+                        Detail = new ErrorDetail[]
+                        {
+                            new ErrorDetail{ Message = "Invalid Station Id", PropertyName = nameof(stationId) }
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                // Log ex
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new ErrorResponse
+                    {
+                        Message = "Internal server error",
+                        Detail = new ErrorDetail[]
+                        {
+                            new ErrorDetail{ Message = "Please contact an administrator" }
+                        }
+                    });
+            }
+
+            return Ok(new RainfallReadingResponse { Readings = readings });
         }
     }
 }

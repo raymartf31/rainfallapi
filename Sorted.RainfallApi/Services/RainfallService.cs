@@ -5,6 +5,9 @@ using Sorted.RainfallApi.Services.Interfaces;
 
 namespace Sorted.RainfallApi.Services
 {
+    /// <summary>
+    /// Consumes Rainfall Api
+    /// </summary>
     public class RainfallService : IRainfallService
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -18,13 +21,14 @@ namespace Sorted.RainfallApi.Services
             _customConfigurationManager = customConfigurationManager;
         }
 
+        /// <inheritdoc />
         public async Task<List<RainfallReading>> GetReadings(int stationId, int count = 10)
         {
             List<RainfallReading> rainfallReading = new List<RainfallReading>();
 
             HttpClient client = _httpClientFactory.CreateClient();
             GetRainFallReadings? response = await client.GetAsync<GetRainFallReadings?>(
-                $"{_customConfigurationManager.AppSettings.RainfallEndpoint}/id/stations/{stationId}/readings?_sorted&_limit={count}");
+                $"{_customConfigurationManager.AppSettings.RainfallApiEndpoint}/id/stations/{stationId}/readings?_sorted&_limit={count}");
 
             if (response != null)
             {

@@ -9,6 +9,6 @@ namespace Sorted.RainfallApi.Responses
     public class RainfallReadingResponse
     {
         [JsonPropertyName("readings")]
-        public RainfallReading[] Readings { get; set; }
+        public List<RainfallReading> Readings { get; set; }
     }
 }

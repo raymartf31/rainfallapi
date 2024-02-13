@@ -2,6 +2,7 @@
 
 using Sorted.RainfallApi.Models;
 using Sorted.RainfallApi.Responses;
+using Sorted.RainfallApi.Services.Interfaces;
 
 namespace Sorted.RainfallApi.Controllers
 {
@@ -9,6 +10,13 @@ namespace Sorted.RainfallApi.Controllers
     [ApiController]
     public class RainfallController : ControllerBase
     {
+        private readonly IRainfallService _rainfallService;
+
+        public RainfallController(IRainfallService rainfallService)
+        {
+            _rainfallService = rainfallService;
+        }
+
         /// <summary>
         /// Get rainfall readings by station Id
         /// </summary>
@@ -22,16 +30,9 @@ namespace Sorted.RainfallApi.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRainfall(string stationId, int count = 10)
         {
-            RainfallReading[] someSampleReading =
-            {
-                new RainfallReading
-                {
-                    AmountMeasured = 1.0m,
-                    DateMeasured = DateTime.Now.ToString("d")
-                }
-            }; 
+            List<RainfallReading> readings = await _rainfallService.GetReadings(Convert.ToInt32(stationId), count);
 
-            return Ok(new RainfallReadingResponse{ Readings = someSampleReading });
+            return Ok(new RainfallReadingResponse{ Readings = readings });
         }
     }
 }

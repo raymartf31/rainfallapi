@@ -6,7 +6,7 @@ namespace Sorted.RainfallApi.Responses
     /// <summary>
     /// Error response
     /// </summary>
-    public class Error
+    public class ErrorResponse
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }

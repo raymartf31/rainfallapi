@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Sorted.RainfallApi.Models;
 using Sorted.RainfallApi.Responses;
 
 namespace Sorted.RainfallApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("rainfall")]
     [ApiController]
     public class RainfallController : ControllerBase
     {
@@ -16,7 +17,9 @@ namespace Sorted.RainfallApi.Controllers
         /// <returns></returns>
         [HttpGet("id/{stationId}/readings")]
         [ProducesResponseType(typeof(RainfallReadingResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRainfall(string stationId, int count = 10)
         {
             RainfallReading[] someSampleReading =

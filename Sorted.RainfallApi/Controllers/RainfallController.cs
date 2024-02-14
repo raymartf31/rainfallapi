@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Sorted.RainfallApi.Extensions;
 using Sorted.RainfallApi.Models;
 using Sorted.RainfallApi.Responses;
 using Sorted.RainfallApi.Services.Interfaces;
@@ -34,6 +34,19 @@ namespace Sorted.RainfallApi.Controllers
 
             try
             {
+                if (!stationId.IsNumber())
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest,
+                        new ErrorResponse
+                        {
+                            Message = "Invalid request",
+                            Detail = new ErrorDetail[]
+                            {
+                                new ErrorDetail{ Message = "Invalid Station Id", PropertyName = nameof(stationId) }
+                            }
+                        });
+                }
+
                 readings = await _rainfallService.GetReadings(Convert.ToInt32(stationId), count);
 
                 if (!readings.Any())
@@ -44,19 +57,6 @@ namespace Sorted.RainfallApi.Controllers
                             Message = "No readings found for the specified stationId"
                         });
                 }
-            }
-            catch (FormatException formatEx)
-            {
-                // Log formatEx
-                return StatusCode(StatusCodes.Status400BadRequest,
-                    new ErrorResponse
-                    {
-                        Message = "Invalid request",
-                        Detail = new ErrorDetail[]
-                        {
-                            new ErrorDetail{ Message = "Invalid Station Id", PropertyName = nameof(stationId) }
-                        }
-                    });
             }
             catch (Exception ex)
             {

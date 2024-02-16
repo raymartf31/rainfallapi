@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Sorted.RainfallApi.Models;
+using Sorted.RainfallApi.Core.Entities;
 
-namespace Sorted.RainfallApi.Responses
+namespace Sorted.RainfallApi.Models
 {
     /// <summary>
     /// Error response
@@ -13,7 +13,7 @@ namespace Sorted.RainfallApi.Responses
         /// </summary>
         [JsonPropertyName("message")]
         public string Message { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the error details
         /// </summary>

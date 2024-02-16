@@ -1,6 +1,6 @@
-﻿using Sorted.RainfallApi.Models;
+﻿using Sorted.RainfallApi.Infrastructure.Services.Dto;
 
-namespace Sorted.RainfallApi.Services.Interfaces
+namespace Sorted.RainfallApi.Infrastructure.Services.Interfaces
 {
     /// <summary>
     /// Rainfall Api Definitions
@@ -12,7 +12,7 @@ namespace Sorted.RainfallApi.Services.Interfaces
         /// </summary>
         /// <param name="stationId">Station Id</param>
         /// <param name="count">Number of readings to get</param>
-        /// <returns>List of readings</returns>
-        Task<List<RainfallReading>> GetReadings(int stationId, int count = 10);
+        /// <returns>Readings</returns>
+        Task<GetRainFallReadings?> GetReadings(int stationId, int count = 10);
     }
 }

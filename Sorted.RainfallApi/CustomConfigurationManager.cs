@@ -1,11 +1,12 @@
-﻿using Sorted.RainfallApi.Models;
+﻿using Sorted.RainfallApi.Core.Entities;
+using Sorted.RainfallApi.Core.Interfaces;
 
 namespace Sorted.RainfallApi
 {
     /// <summary>
     /// Custom configuration manager
     /// </summary>
-    public class CustomConfigurationManager
+    public class CustomConfigurationManager : ICustomConfigManager
     {
         public CustomConfigurationManager(AppSettings appSettings)
         {

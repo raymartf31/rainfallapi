@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sorted.RainfallApi.Core.Entities;
+using Sorted.RainfallApi.Core.Services.Interfaces;
 using Sorted.RainfallApi.Extensions;
 using Sorted.RainfallApi.Models;
-using Sorted.RainfallApi.Responses;
-using Sorted.RainfallApi.Services.Interfaces;
 
 namespace Sorted.RainfallApi.Controllers
 {
@@ -10,11 +10,11 @@ namespace Sorted.RainfallApi.Controllers
     [ApiController]
     public class RainfallController : ControllerBase
     {
-        private readonly IRainfallService _rainfallService;
+        private readonly IRainfallClient _rainfallClient;
 
-        public RainfallController(IRainfallService rainfallService)
+        public RainfallController(IRainfallClient rainfallClient)
         {
-            _rainfallService = rainfallService;
+            _rainfallClient = rainfallClient;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Sorted.RainfallApi.Controllers
                         });
                 }
 
-                readings = await _rainfallService.GetReadings(Convert.ToInt32(stationId), count);
+                readings = await _rainfallClient.GetReadings(Convert.ToInt32(stationId), count);
 
                 if (!readings.Any())
                 {

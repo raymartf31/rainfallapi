@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Sorted.RainfallApi.Models
+namespace Sorted.RainfallApi.Core.Entities
 {
     /// <summary>
     /// Rainfall reading

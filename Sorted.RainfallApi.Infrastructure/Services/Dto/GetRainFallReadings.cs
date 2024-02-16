@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Sorted.RainfallApi.Dto
+namespace Sorted.RainfallApi.Infrastructure.Services.Dto
 {
     /// <summary>
     /// Rain fall readings

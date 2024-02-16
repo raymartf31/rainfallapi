@@ -1,8 +1,12 @@
 using Microsoft.OpenApi.Models;
+
 using Sorted.RainfallApi;
-using Sorted.RainfallApi.Models;
-using Sorted.RainfallApi.Services;
-using Sorted.RainfallApi.Services.Interfaces;
+using Sorted.RainfallApi.Core.Entities;
+using Sorted.RainfallApi.Core.Interfaces;
+using Sorted.RainfallApi.Core.Services;
+using Sorted.RainfallApi.Core.Services.Interfaces;
+using Sorted.RainfallApi.Infrastructure.Services;
+using Sorted.RainfallApi.Infrastructure.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 AppSettings appSettings = builder.Configuration.GetSection("RainfallApi").Get<AppSettings>();
 CustomConfigurationManager configurationManager = new CustomConfigurationManager(appSettings);
 
-builder.Services.AddSingleton<CustomConfigurationManager>(configurationManager);
-builder.Services.AddScoped(typeof(IRainfallService), typeof(RainfallService));
 builder.Services.AddHttpClient();
+builder.Services.AddSingleton<ICustomConfigManager>(configurationManager);
+builder.Services.AddScoped<IRainfallService>(s => new RainfallService(s.GetRequiredService<IHttpClientFactory>(), appSettings.RainfallApiEndpoint));
+builder.Services.AddScoped(typeof(IRainfallClient), typeof(RainfallClient));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

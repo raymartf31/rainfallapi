@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorted.RainfallApi", "Sorted.RainfallApi\Sorted.RainfallApi.csproj", "{4745EC58-263E-4824-82BF-44FDDF1AD98B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorted.RainfallApi.Infrastructure", "Sorted.RainfallApi.Infrastructure\Sorted.RainfallApi.Infrastructure.csproj", "{94FBC509-5DF2-4F16-9916-DBADCDA05BD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorted.RainfallApi.Infrastructure", "Sorted.RainfallApi.Infrastructure\Sorted.RainfallApi.Infrastructure.csproj", "{94FBC509-5DF2-4F16-9916-DBADCDA05BD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorted.RainfallApi.Common", "Sorted.RainfallApi.Common\Sorted.RainfallApi.Common.csproj", "{0344053F-FFBF-42BB-AC36-E6827A9E5B6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorted.RainfallApi.Common", "Sorted.RainfallApi.Common\Sorted.RainfallApi.Common.csproj", "{0344053F-FFBF-42BB-AC36-E6827A9E5B6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorted.RainfallApi.Core", "Sorted.RainfallApi.Domain\Sorted.RainfallApi.Core.csproj", "{6FB7DCDA-F932-4DDC-9375-3FE474F771F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorted.RainfallApi.Core", "Sorted.RainfallApi.Core\Sorted.RainfallApi.Core.csproj", "{0C94A1FC-C321-481E-8FBD-32D1CBE7B6EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{0344053F-FFBF-42BB-AC36-E6827A9E5B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0344053F-FFBF-42BB-AC36-E6827A9E5B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0344053F-FFBF-42BB-AC36-E6827A9E5B6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FB7DCDA-F932-4DDC-9375-3FE474F771F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FB7DCDA-F932-4DDC-9375-3FE474F771F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FB7DCDA-F932-4DDC-9375-3FE474F771F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FB7DCDA-F932-4DDC-9375-3FE474F771F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C94A1FC-C321-481E-8FBD-32D1CBE7B6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C94A1FC-C321-481E-8FBD-32D1CBE7B6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C94A1FC-C321-481E-8FBD-32D1CBE7B6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C94A1FC-C321-481E-8FBD-32D1CBE7B6EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sorted.RainfallApi</name>
+    </assembly>
+    <members>
+        <member name="M:Sorted.RainfallApi.Controllers.RainfallController.GetRainfall(System.String,System.Int32)">
+            <summary>
+            Get rainfall readings by station Id
+            </summary>
+            <param name="stationId">The id of the reading station</param>
+            <param name="count">The number of readings to return</param>
+            <returns code="200">Successful</returns>
+        </member>
+        <member name="T:Sorted.RainfallApi.CustomConfigurationManager">
+            <summary>
+            Custom configuration manager
+            </summary>
+        </member>
+        <member name="P:Sorted.RainfallApi.CustomConfigurationManager.AppSettings">
+            <summary>
+            Gets or sets the application settings
+            </summary>
+        </member>
+        <member name="T:Sorted.RainfallApi.Models.ErrorResponse">
+            <summary>
+            Error response
+            </summary>
+        </member>
+        <member name="P:Sorted.RainfallApi.Models.ErrorResponse.Message">
+            <summary>
+            Gets or sets the error message
+            </summary>
+        </member>
+        <member name="P:Sorted.RainfallApi.Models.ErrorResponse.Detail">
+            <summary>
+            Gets or sets the error details
+            </summary>
+        </member>
+        <member name="T:Sorted.RainfallApi.Models.RainfallReadingResponse">
+            <summary>
+            Rainfall reading response
+            </summary>
+        </member>
+        <member name="P:Sorted.RainfallApi.Models.RainfallReadingResponse.Readings">
+            <summary>
+            Gets or sets the readings
+            </summary>
+        </member>
+    </members>
+</doc>

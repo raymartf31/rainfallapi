@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+
+using Microsoft.AspNetCore.Mvc;
+
 using Sorted.RainfallApi.Core.Entities;
 using Sorted.RainfallApi.Core.Services.Interfaces;
-using Sorted.RainfallApi.Extensions;
 using Sorted.RainfallApi.Models;
 
 namespace Sorted.RainfallApi.Controllers
@@ -22,57 +24,51 @@ namespace Sorted.RainfallApi.Controllers
         /// </summary>
         /// <param name="stationId">The id of the reading station</param>
         /// <param name="count">The number of readings to return</param>
-        /// <returns></returns>
+        /// <returns code="200">Successful</returns>
         [HttpGet("id/{stationId}/readings")]
-        [ProducesResponseType(typeof(RainfallReadingResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetRainfall(string stationId, int count = 10)
+        [ProducesResponseType(typeof(RainfallResultResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(RainfallResultResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(RainfallResultResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<RainfallResultResponse>> GetRainfall([Range(0, int.MaxValue, ErrorMessage = "Invalid Station Id")][FromRoute]string stationId, int count = 10)
         {
             List<RainfallReading> readings;
 
             try
             {
-                if (!stationId.IsNumber())
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest,
-                        new ErrorResponse
-                        {
-                            Message = "Invalid request",
-                            Detail = new ErrorDetail[]
-                            {
-                                new ErrorDetail{ Message = "Invalid Station Id", PropertyName = nameof(stationId) }
-                            }
-                        });
-                }
-
                 readings = await _rainfallClient.GetReadings(Convert.ToInt32(stationId), count);
 
                 if (!readings.Any())
                 {
-                    return StatusCode(StatusCodes.Status404NotFound,
-                        new ErrorResponse
+                    return NotFound(new RainfallResultResponse
+                    {
+                        Error = new ErrorResponse
                         {
                             Message = "No readings found for the specified stationId"
-                        });
+                        }
+                    });
                 }
             }
             catch (Exception ex)
             {
                 // Log ex
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new ErrorResponse
+                    new RainfallResultResponse
                     {
-                        Message = "Internal server error",
-                        Detail = new ErrorDetail[]
+                        Error = new ErrorResponse
                         {
-                            new ErrorDetail{ Message = "Please contact an administrator" }
+                            Message = "Internal server error",
+                            Detail = new ErrorDetail[]
+                            {
+                                new ErrorDetail{ Message = "Please contact an administrator" }
+                            }
                         }
                     });
             }
 
-            return Ok(new RainfallReadingResponse { Readings = readings });
+            return Ok(new RainfallResultResponse
+            {
+                RainfallReading = new RainfallReadingResponse { Readings = readings }
+            });
         }
     }
 }

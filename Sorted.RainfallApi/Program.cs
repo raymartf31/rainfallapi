@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 
 using Sorted.RainfallApi;
@@ -19,7 +20,8 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<ICustomConfigManager>(configurationManager);
 builder.Services.AddScoped<IRainfallService>(s => new RainfallService(s.GetRequiredService<IHttpClientFactory>(), appSettings.RainfallApiEndpoint));
 builder.Services.AddScoped(typeof(IRainfallClient), typeof(RainfallClient));
-builder.Services.AddControllers();
+builder.Services.AddControllers( )
+    .AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(s =>
@@ -34,6 +36,9 @@ builder.Services.AddSwaggerGen(s =>
             Url = new Uri("https://www.sorted.com/")
         }
     });
+    var xmlFile = "Sorted.Rain.xml";
+    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    s.IncludeXmlComments(xmlCommentsFullPath);
 });
 
 var app = builder.Build();
